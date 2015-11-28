@@ -1,16 +1,31 @@
-package com.example.morkasus.recyclerview;
+package com.example.morkasus.recyclerview.common;
 
 /**
  * Created by morkasus on 06/11/2015.
  */
+
+
 public class Task {
 
+    private int mId = 0;
     private String mTitle;
     private String mTask;
 
-    Task(String title, String task) {
+
+    public Task(String title, String task) {
         setTitle(title);
         setTask(task);
+    }
+
+    public Task() {}
+
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getTitle() {
@@ -28,4 +43,5 @@ public class Task {
     public void setTask(String task) {
         mTask = task;
     }
+
 }

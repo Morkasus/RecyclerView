@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="100dp"
     android:padding="10dp"
-    android:id="@+id/relLayout">
+    android:id="@+id/relLayout"
+    tools:background="@drawable/bg_gradient">
 
 
     <TextView
@@ -15,11 +17,15 @@
         android:textSize="18dp"
         android:maxLines="1"
         android:id="@+id/title"
-        android:textColor="#000"
+        android:textColor="#ffffffff"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/doneButton"/>
+        android:layout_above="@+id/task"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/doneButton"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -27,20 +33,30 @@
         android:text="task"
         android:id="@+id/task"
         android:maxLines="3"
-        android:layout_toEndOf="@+id/title"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/doneButton"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@+id/doneButton"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
         android:id="@+id/doneButton"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/delete"
+        android:background="#40ffffff"
+        android:text="Done"
+        android:textSize="10sp"
+        android:textColor="#ffffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignBaseline="@+id/task"
+        android:textStyle="bold|italic"
         />
 
 

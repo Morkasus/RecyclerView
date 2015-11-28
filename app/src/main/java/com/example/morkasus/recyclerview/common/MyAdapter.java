@@ -1,5 +1,7 @@
-package com.example.morkasus.recyclerview;
+package com.example.morkasus.recyclerview.common;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.morkasus.recyclerview.R;
+import com.example.morkasus.recyclerview.ui.MainActivity;
+
 import java.util.List;
 
 /**
@@ -15,13 +19,14 @@ import java.util.List;
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    public List<Task> mTasks;
-    public MyAdapter() {
-        super();
-        mTasks = new ArrayList<Task>();
-        add(new Task("Demo", "demo demo demo demo demo"));
-    }
+    private Context mContext;
+    private List<Task> mTasks;
 
+    public MyAdapter(Context context, List<Task> tasks) {
+        super();
+        mContext = context;
+        mTasks = tasks;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -33,9 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Task task = mTasks.get(position);
-        holder.title.setText(task.getTitle());
-        holder.task.setText(task.getTask());
+        holder.bind(mTasks.get(position));
     }
 
     @Override
@@ -44,8 +47,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-    public void add(Task item) {
-        mTasks.add(item);
+    public Task getTaskInPosition(int position) {
+        return mTasks.get(position);
+    }
+
+    public void add(Task task) {
+        mTasks.add(task);
         notifyDataSetChanged();
     }
 
@@ -65,11 +72,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             title = (TextView)itemView.findViewById(R.id.title);
             task = (TextView)itemView.findViewById(R.id.task);
             doneButton = (Button) itemView.findViewById(R.id.doneButton);
-
+        }
+        public void bind(Task t) {
+            title.setText(t.getTitle());
+            task.setText(t.getTask());
             doneButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
+                    if(mContext instanceof MainActivity){
+                        ((MainActivity)mContext).removeTask(mTasks.get(position));
+                    }
                     removeAt(position);
                 }
             });
